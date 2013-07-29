@@ -21,9 +21,25 @@ layout: default
   </div>
 </div>
 <aside class="sidebar">
-  {% if site.blog_index_asides.size %}
-    {% include_array blog_index_asides %}
-  {% else %}
-    {% include_array default_asides %}
-  {% endif %}
+  <section class="post">
+    {% if site.blog_index_asides.size %}
+      {% include_array blog_index_asides %}
+    {% else %}
+      {% include_array default_asides %}
+    {% endif %}
+  </section>
+  <section class="even">
+    <h1>About Me</h1>
+    <p>
+      Dechao Qiu, Graduate of Peking University.
+      <br>
+      Home Page: <a href="http://renoqiu.com" target="_blank">renoqiu.com</a>.
+      <br><br>
+      - twitter: <a href="https://twitter.com/renoqiu">@renoqiu</a><br />
+      - Facebook: <a href="http://facebook.com/dechao.qiu">@dechao.qiu</a><br />
+      - github: <a href="https://github.com/renoqiu">@renoqiu</a><br />
+      - Weibo: <a href="http://weibo.com/renoqiu">@阿超QDC</a><br />
+      <br><br>
+    </p>
+  </section>
 </aside>
