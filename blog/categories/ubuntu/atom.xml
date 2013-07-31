@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ubuntu | Reno's Blog]]></title>
+  <link href="http://renoqiu.github.io/blog/categories/ubuntu/atom.xml" rel="self"/>
+  <link href="http://renoqiu.github.io/"/>
+  <updated>2013-07-31T09:34:51-07:00</updated>
+  <id>http://renoqiu.github.io/</id>
+  <author>
+    <name><![CDATA[Reno]]></name>
+    <email><![CDATA[dechao.qiu@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Install vsftpd on Ubuntu]]></title>
+    <link href="http://renoqiu.github.io/blog/2013/07/31/install-vsftpd-on-ubuntu/"/>
+    <updated>2013-07-31T08:51:00-07:00</updated>
+    <id>http://renoqiu.github.io/blog/2013/07/31/install-vsftpd-on-ubuntu</id>
+    <content type="html"><![CDATA[<ol>
+<li>sudo apt-get install vsftpd</li>
+<li>change config: /etc/vsftpd.conf</li>
+<li>anonymous_enable=NO</li>
+<li>local_enable=YES</li>
+<li>write_enable=YES</li>
+<li>sudo service vsftpd restart</li>
+</ol>
+
+
+<p>Client:</p>
+
+<pre><code>If you are using Yummy FTP, you may have trouble get file list from ftp server. Try go to Preference, and go to Server Options, unselect ""Default to Passive FTP"
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

@@ -9,13 +9,12 @@
   <meta name="author" content="Reno">
 
   
-  <meta name="description" content="Hello World. Discover if a number is primeblog1
-2
-3
-4
-5
-class Fixnum def prime? (&#39;1&#39; * self) !~ /^1?$|^(11+?)\1+$/ end
-end (cmain.c) download &hellip;">
+  <meta name="description" content="sudo apt-get install vsftpd
+change config: /etc/vsftpd.conf
+anonymous_enable=NO
+local_enable=YES
+write_enable=YES
+sudo service vsftpd restart Client &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -73,6 +72,55 @@ end (cmain.c) download &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/31/install-vsftpd-on-ubuntu/">Install Vsftpd on Ubuntu</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-31T08:51:00-07:00" pubdate data-updated="true">Jul 31<span>st</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ol>
+<li>sudo apt-get install vsftpd</li>
+<li>change config: /etc/vsftpd.conf</li>
+<li>anonymous_enable=NO</li>
+<li>local_enable=YES</li>
+<li>write_enable=YES</li>
+<li>sudo service vsftpd restart</li>
+</ol>
+
+
+<p>Client:</p>
+
+<pre><code>If you are using Yummy FTP, you may have trouble get file list from ftp server. Try go to Preference, and go to Server Options, unselect ""Default to Passive FTP"
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -222,6 +270,10 @@ end (cmain.c) download &hellip;">
       <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/31/install-vsftpd-on-ubuntu/">Install Vsftpd on Ubuntu</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/07/28/hello-world/">Hello World</a>
