@@ -4,7 +4,7 @@ title: "Install vsftpd on Ubuntu"
 date: 2013-07-31 08:51
 comments: true
 author: Reno
-categories: [Ubuntu, Software]
+categories: [Ubuntu, Linux, Software]
 ---
 
 
