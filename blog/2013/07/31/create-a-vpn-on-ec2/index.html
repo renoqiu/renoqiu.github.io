@@ -122,7 +122,8 @@ cp -r / &hellip;">
 </ol>
 
 
-<figure class='code'><figcaption><span>var configure -</span><a href='/etc/openvpn/easy-rsa/vars'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>/etc/openvpn/easy-rsa/vars </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -132,16 +133,17 @@ cp -r / &hellip;">
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>export KEY_COUNTRY="US"
-</span><span class='line'>export KEY_PROVINCE="CA"
-</span><span class='line'>export KEY_CITY="SanJose"
-</span><span class='line'>export KEY_ORG="test.com"
-</span><span class='line'>export KEY_EMAIL="me@test.com"
-</span><span class='line'>export KEY_EMAIL=me@test.com
-</span><span class='line'>export KEY_CN=test.com
-</span><span class='line'>export KEY_NAME=test
-</span><span class='line'>export KEY_OU=Personal
-</span><span class='line'>export KEY_SIZE=2048</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">export</span> <span class="no">KEY_COUNTRY</span><span class="o">=</span><span class="s2">&quot;US&quot;</span>
+</span><span class='line'><span class="n">export</span> <span class="no">KEY_PROVINCE</span><span class="o">=</span><span class="s2">&quot;CA&quot;</span>
+</span><span class='line'><span class="n">export</span> <span class="no">KEY_CITY</span><span class="o">=</span><span class="s2">&quot;SanJose&quot;</span>
+</span><span class='line'><span class="n">export</span> <span class="no">KEY_ORG</span><span class="o">=</span><span class="s2">&quot;test.com&quot;</span>
+</span><span class='line'><span class="n">export</span> <span class="no">KEY_EMAIL</span><span class="o">=</span><span class="s2">&quot;me@test.com&quot;</span>
+</span><span class='line'><span class="n">export</span> <span class="no">KEY_EMAIL</span><span class="o">=</span><span class="n">me</span><span class="vi">@test</span><span class="o">.</span><span class="n">com</span>
+</span><span class='line'><span class="n">export</span> <span class="no">KEY_CN</span><span class="o">=</span><span class="nb">test</span><span class="o">.</span><span class="n">com</span>
+</span><span class='line'><span class="n">export</span> <span class="no">KEY_NAME</span><span class="o">=</span><span class="nb">test</span>
+</span><span class='line'><span class="n">export</span> <span class="no">KEY_OU</span><span class="o">=</span><span class="no">Personal</span>
+</span><span class='line'><span class="n">export</span> <span class="no">KEY_SIZE</span><span class="o">=</span><span class="mi">2048</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>Generate Certificate Authority File</h3>
@@ -196,7 +198,8 @@ cp -r / &hellip;">
 </ol>
 
 
-<figure class='code'><figcaption><span>Server Configure -</span><a href='/etc/openvpn/server.conf'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>/etc/openvpn/server.conf </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -214,24 +217,25 @@ cp -r / &hellip;">
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>port 443
-</span><span class='line'>proto tcp
-</span><span class='line'>dev tun
-</span><span class='line'>ca /etc/openvpn/easy-rsa/keys/ca.crt
-</span><span class='line'>cert /etc/openvpn/easy-rsa/keys/server.crt
-</span><span class='line'>key /etc/openvpn/easy-rsa/keys/server.key
-</span><span class='line'>dh /etc/openvpn/easy-rsa/keys/dh2048.pem
-</span><span class='line'>server 10.168.1.0 255.255.255.0
-</span><span class='line'>push "redirect-gateway def1"
-</span><span class='line'>push "dhcp-option DNS 8.8.8.8"
-</span><span class='line'>push "dhcp-option DNS 8.8.4.4"
-</span><span class='line'>client-to-client
-</span><span class='line'>keepalive 10 120
-</span><span class='line'>comp-lzo
-</span><span class='line'>persist-key
-</span><span class='line'>persist-tun
-</span><span class='line'>verb 3
-</span><span class='line'>status openvpn-status.log</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">port</span> <span class="mi">443</span>
+</span><span class='line'><span class="n">proto</span> <span class="n">tcp</span>
+</span><span class='line'><span class="n">dev</span> <span class="n">tun</span>
+</span><span class='line'><span class="n">ca</span> <span class="sr">/etc/o</span><span class="n">penvpn</span><span class="o">/</span><span class="n">easy</span><span class="o">-</span><span class="n">rsa</span><span class="o">/</span><span class="n">keys</span><span class="o">/</span><span class="n">ca</span><span class="o">.</span><span class="n">crt</span>
+</span><span class='line'><span class="n">cert</span> <span class="sr">/etc/o</span><span class="n">penvpn</span><span class="o">/</span><span class="n">easy</span><span class="o">-</span><span class="n">rsa</span><span class="o">/</span><span class="n">keys</span><span class="o">/</span><span class="n">server</span><span class="o">.</span><span class="n">crt</span>
+</span><span class='line'><span class="n">key</span> <span class="sr">/etc/o</span><span class="n">penvpn</span><span class="o">/</span><span class="n">easy</span><span class="o">-</span><span class="n">rsa</span><span class="o">/</span><span class="n">keys</span><span class="o">/</span><span class="n">server</span><span class="o">.</span><span class="n">key</span>
+</span><span class='line'><span class="n">dh</span> <span class="sr">/etc/o</span><span class="n">penvpn</span><span class="o">/</span><span class="n">easy</span><span class="o">-</span><span class="n">rsa</span><span class="o">/</span><span class="n">keys</span><span class="o">/</span><span class="n">dh2048</span><span class="o">.</span><span class="n">pem</span>
+</span><span class='line'><span class="n">server</span> <span class="mi">10</span><span class="o">.</span><span class="mi">168</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span> <span class="mi">255</span><span class="o">.</span><span class="mi">255</span><span class="o">.</span><span class="mi">255</span><span class="o">.</span><span class="mi">0</span>
+</span><span class='line'><span class="n">push</span> <span class="s2">&quot;redirect-gateway def1&quot;</span>
+</span><span class='line'><span class="n">push</span> <span class="s2">&quot;dhcp-option DNS 8.8.8.8&quot;</span>
+</span><span class='line'><span class="n">push</span> <span class="s2">&quot;dhcp-option DNS 8.8.4.4&quot;</span>
+</span><span class='line'><span class="n">client</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">client</span>
+</span><span class='line'><span class="n">keepalive</span> <span class="mi">10</span> <span class="mi">120</span>
+</span><span class='line'><span class="n">comp</span><span class="o">-</span><span class="n">lzo</span>
+</span><span class='line'><span class="n">persist</span><span class="o">-</span><span class="n">key</span>
+</span><span class='line'><span class="n">persist</span><span class="o">-</span><span class="n">tun</span>
+</span><span class='line'><span class="n">verb</span> <span class="mi">3</span>
+</span><span class='line'><span class="n">status</span> <span class="n">openvpn</span><span class="o">-</span><span class="n">status</span><span class="o">.</span><span class="n">log</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>Setup ip forward</h3>
@@ -250,16 +254,18 @@ cp -r / &hellip;">
 </ol>
 
 
-<figure class='code'><figcaption><span>system configure -</span><a href='/etc/sysctl.conf'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>/etc/sysctl.conf </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>net.ipv4.ip_forward = 1
-</span><span class='line'>  net.ipv4.conf.all.send_redirects = 0
-</span><span class='line'>  net.ipv4.conf.default.send_redirects = 0
-</span><span class='line'>  net.ipv4.conf.all.accept_redirects = 0
-</span><span class='line'>  net.ipv4.conf.default.accept_redirects = 0</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="n">net</span><span class="o">.</span><span class="n">ipv4</span><span class="o">.</span><span class="n">ip_forward</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class='line'>  <span class="n">net</span><span class="o">.</span><span class="n">ipv4</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">send_redirects</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'>  <span class="n">net</span><span class="o">.</span><span class="n">ipv4</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">default</span><span class="o">.</span><span class="n">send_redirects</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'>  <span class="n">net</span><span class="o">.</span><span class="n">ipv4</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">accept_redirects</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'>  <span class="n">net</span><span class="o">.</span><span class="n">ipv4</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">default</span><span class="o">.</span><span class="n">accept_redirects</span> <span class="o">=</span> <span class="mi">0</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <ol>
@@ -284,25 +290,45 @@ cp -r / &hellip;">
 </li>
 <li>Create a folder on you Desktop, with name like <code>myvpn</code></li>
 <li>Put all above 4 files into the foler</li>
-<li><p>Create a text file named: <code>config.ovpn</code>, PS: change <code>111.111.111.111</code> to your server&rsquo;s ip address.</p>
+<li>Create a text file named: <code>config.ovpn</code>, PS: change <code>111.111.111.111</code> to your server&rsquo;s ip address.</li>
+</ol>
 
-<p> <code>
- client
- dev tun
- proto tcp
- remote 111.111.111.111 443
- resolv-retry infinite
- nobind
- persist-key
- persist-tun
- ca ca.crt
- cert davion.crt
- key davion.key
- ns-cert-type server
- # redirect-gateway
- comp-lzo
- verb 3
-</code></p></li>
+
+<figure class='code'><figcaption><span>/etc/openvpn/easy-rsa/vars </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">client</span>
+</span><span class='line'><span class="n">dev</span> <span class="n">tun</span>
+</span><span class='line'><span class="n">proto</span> <span class="n">tcp</span>
+</span><span class='line'><span class="n">remote</span> <span class="mi">111</span><span class="o">.</span><span class="mi">111</span><span class="o">.</span><span class="mi">111</span><span class="o">.</span><span class="mi">111</span> <span class="mi">443</span>
+</span><span class='line'><span class="n">resolv</span><span class="o">-</span><span class="k">retry</span> <span class="n">infinite</span>
+</span><span class='line'><span class="n">nobind</span>
+</span><span class='line'><span class="n">persist</span><span class="o">-</span><span class="n">key</span>
+</span><span class='line'><span class="n">persist</span><span class="o">-</span><span class="n">tun</span>
+</span><span class='line'><span class="n">ca</span> <span class="n">ca</span><span class="o">.</span><span class="n">crt</span>
+</span><span class='line'><span class="n">cert</span> <span class="n">davion</span><span class="o">.</span><span class="n">crt</span>
+</span><span class='line'><span class="n">key</span> <span class="n">davion</span><span class="o">.</span><span class="n">key</span>
+</span><span class='line'><span class="n">ns</span><span class="o">-</span><span class="n">cert</span><span class="o">-</span><span class="n">type</span> <span class="n">server</span>
+</span><span class='line'><span class="n">redirect</span><span class="o">-</span><span class="n">gateway</span>
+</span><span class='line'><span class="n">comp</span><span class="o">-</span><span class="n">lzo</span>
+</span><span class='line'><span class="n">verb</span> <span class="mi">3</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
 <li>Change folder <code>myvpn</code> to <code>myvpn.tblk</code></li>
 <li>Double click <code>myvpn.tblk</code> to install this vpn</li>
 <li>After install it, on the top right corner you can see a house-like icon, click it and selct <code>connect</code></li>
