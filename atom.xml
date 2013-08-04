@@ -4,7 +4,7 @@
   <title><![CDATA[Reno's Blog]]></title>
   <link href="http://renoqiu.github.io/atom.xml" rel="self"/>
   <link href="http://renoqiu.github.io/"/>
-  <updated>2013-08-03T22:17:42-07:00</updated>
+  <updated>2013-08-03T22:19:17-07:00</updated>
   <id>http://renoqiu.github.io/</id>
   <author>
     <name><![CDATA[Reno]]></name>
@@ -56,15 +56,15 @@
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>export KEY_COUNTRY="US"
-</span><span class='line'>  export KEY_PROVINCE="CA"
-</span><span class='line'>  export KEY_CITY="SanJose"
-</span><span class='line'>  export KEY_ORG="renoqiu.com"
-</span><span class='line'>  export KEY_EMAIL="me@renoqiu.com"
-</span><span class='line'>  export KEY_EMAIL=me@renoqiu.com
-</span><span class='line'>  export KEY_CN=renoqiu.com
-</span><span class='line'>  export KEY_NAME=Reno
-</span><span class='line'>  export KEY_OU=Personal
-</span><span class='line'>  export KEY_SIZE=2048</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>export KEY_PROVINCE="CA"
+</span><span class='line'>export KEY_CITY="SanJose"
+</span><span class='line'>export KEY_ORG="renoqiu.com"
+</span><span class='line'>export KEY_EMAIL="me@renoqiu.com"
+</span><span class='line'>export KEY_EMAIL=me@renoqiu.com
+</span><span class='line'>export KEY_CN=renoqiu.com
+</span><span class='line'>export KEY_NAME=Reno
+</span><span class='line'>export KEY_OU=Personal
+</span><span class='line'>export KEY_SIZE=2048</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>Generate Certificate Authority File</h3>
