@@ -4,7 +4,7 @@
   <title><![CDATA[Reno's Blog]]></title>
   <link href="http://renoqiu.github.io/atom.xml" rel="self"/>
   <link href="http://renoqiu.github.io/"/>
-  <updated>2013-08-03T22:36:02-07:00</updated>
+  <updated>2013-08-03T22:37:11-07:00</updated>
   <id>http://renoqiu.github.io/</id>
   <author>
     <name><![CDATA[Reno]]></name>
@@ -45,7 +45,8 @@
 </ol>
 
 
-<figure class='code'><figcaption><span>[Configure vars -</span><a href='http://renoqiu.github.io/etc/openvpn/easy-rsa/vars]'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>Configure vars </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -119,7 +120,8 @@
 </ol>
 
 
-<figure class='code'><figcaption><span>Configure server -</span><a href='http://renoqiu.github.io/etc/openvpn/server.rb'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>Configure server </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -173,7 +175,8 @@
 </ol>
 
 
-<figure class='code'><figcaption><span>Configure iptable -</span><a href='http://renoqiu.github.io/etc/sysctl.conf'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>Configure iptable </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
