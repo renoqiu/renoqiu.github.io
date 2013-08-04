@@ -18,7 +18,7 @@ categories:
 1. cd /etc/openvpn/easy-rsa/
 
 ### Change vars file
-1. vi /etc/openvpn/easy-rsa/vars and change to following fields, you need to adjust to your location and email address.
+1. edit /etc/openvpn/easy-rsa/vars and change the following fields, you need to use your own location and email address.
 
 {% codeblock Configure vars %}
 export KEY_COUNTRY="US"
@@ -38,7 +38,6 @@ export KEY_SIZE=2048
 1. ./clean-all
 1. source vars
 1. ./build-ca
-1. Do as the prompt
 
 ### Generate Server Certificate and Key
 1. cd /etc/openvpn/easy-rsa/
@@ -47,12 +46,12 @@ export KEY_SIZE=2048
 1. cd keys
 1. openvpn --genkey --secret ta.key
 1. sudo cp server.crt server.key ca.crt dh2048.pem ta.key /etc/openvpn/
-1. ./build-key-server server // ignore this line
+1. ./build-key-server server // ignore this line for now
 
 ### Generate Client Certificate and key
 1. cd /etc/openvpn/easy-rsa/
 1. source vars
-1. Change someuniqueclientcn to a unique name, and change davion to any client name you like.
+1. Change ```someuniqueclientcn``` to a unique name of your choice, and change ```davion``` to any client name you like.
 
 	```
 	KEY_CN=someuniqueclientcn ./pkitool davion
@@ -89,21 +88,21 @@ status openvpn-status.log
 ### Setup ip forward
 1. iptables -t nat -A POSTROUTING -s 10.168.0.0/16 -o eth0 -j MASQUERADE
 1. iptables-save > /etc/iptables.rules
-1. vi /etc/network/if-up.d/iptables
+1. Edit /etc/network/if-up.d/iptables create it if not exist
 	
-	```
-	#!/bin/sh
-	iptables-restore < /etc/iptables.rules
-	```
+{% codeblock Restore iptable %}
+#!/bin/sh
+iptables-restore < /etc/iptables.rules
+{% endcodeblock %}
 1. chmod +x /etc/network/if-up.d/iptables
-1. vi /etc/sysctl.conf, change the following fields.
+1. Edit /etc/sysctl.conf and change the following fields.
 
 {% codeblock Configure iptable %}
-	net.ipv4.ip_forward = 1
-	net.ipv4.conf.all.send_redirects = 0
-	net.ipv4.conf.default.send_redirects = 0
-	net.ipv4.conf.all.accept_redirects = 0
-	net.ipv4.conf.default.accept_redirects = 0
+net.ipv4.ip_forward = 1
+net.ipv4.conf.all.send_redirects = 0
+net.ipv4.conf.default.send_redirects = 0
+net.ipv4.conf.all.accept_redirects = 0
+net.ipv4.conf.default.accept_redirects = 0
 {% endcodeblock %}
 
 1. sudo sysctl -p
@@ -117,8 +116,8 @@ status openvpn-status.log
 	- client.crt
 	- client.key
 	- ta.key
-3. Create a folder on you Desktop, with name like ```myvpn```
-4. Put all above 4 files into the foler
+3. Create a folder on you Desktop, with name of your choice such as:  ```myvpn```
+4. Put all above 4 files into the folder
 5. Create a text file named: ```config.ovpn```, PS: change ```111.111.111.111``` to your server's ip address.
 
 {% codeblock Configure client %}
@@ -141,7 +140,7 @@ verb 3
 
 6. Change folder ```myvpn``` to ```myvpn.tblk```
 7. Double click ```myvpn.tblk``` to install this vpn
-8. After install it, on the top right corner you can see a house-like icon, click it and selct ```connect```
+8. After install it, on the top right corner you will see a house-like icon, click it and select ```connect ***```
 
 ## Reference Link
 1. http://leapchasm.com/blog/2011/12/07/shearing-firesheep-with-the-cloud/
