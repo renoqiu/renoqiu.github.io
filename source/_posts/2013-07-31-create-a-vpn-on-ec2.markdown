@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Create a vpn on ec2"
+title: "Install and Configure OpenVPN on EC2"
 date: 2013-07-31 18:25
 categories: [Linux, VPN, EC2, OpenVPN]
 comments: true
