@@ -20,18 +20,18 @@ categories:
 ### Change vars file
 1. vi /etc/openvpn/easy-rsa/vars and change to following fields, you need to adjust to your location and email address.
 
-	```
-	export KEY_COUNTRY="US"
-	export KEY_PROVINCE="CA"
-	export KEY_CITY="SanJose"
-	export KEY_ORG="renoqiu.com"
-	export KEY_EMAIL="me@renoqiu.com"
-	export KEY_EMAIL=me@renoqiu.com
-	export KEY_CN=renoqiu.com
-	export KEY_NAME=Reno
-	export KEY_OU=Personal
-	export KEY_SIZE=2048
-	```
+{% codeblock Configure vars %}
+export KEY_COUNTRY="US"
+export KEY_PROVINCE="CA"
+export KEY_CITY="SanJose"
+export KEY_ORG="test.com"
+export KEY_EMAIL="me@test.com"
+export KEY_EMAIL=me@test.com
+export KEY_CN=test.com
+export KEY_NAME=test
+export KEY_OU=Personal
+export KEY_SIZE=2048
+{% endcodeblock %}
 
 ### Generate Certificate Authority File
 1. source vars
@@ -65,27 +65,26 @@ categories:
 ### Configure OpenVPN Server
 1. vi /etc/openvpn/server.conf
 
-	```
-	port 443
-	proto tcp
-	dev tun
-	ca /etc/openvpn/easy-rsa/keys/ca.crt
-	cert /etc/openvpn/easy-rsa/keys/server.crt
-	key /etc/openvpn/easy-rsa/keys/server.key
-	dh /etc/openvpn/easy-rsa/keys/dh2048.pem
-	server 10.168.1.0 255.255.255.0
-	# push "redirect-gateway def1"
-	push "redirect-gateway"
-	push "dhcp-option DNS 8.8.8.8"
-	push "dhcp-option DNS 8.8.4.4"
-	client-to-client
-	keepalive 10 120
-	comp-lzo
-	persist-key
-	persist-tun
-	verb 3
-	status openvpn-status.log
-	```
+{% codeblock Configure server %}
+port 443
+proto tcp
+dev tun
+ca /etc/openvpn/easy-rsa/keys/ca.crt
+cert /etc/openvpn/easy-rsa/keys/server.crt
+key /etc/openvpn/easy-rsa/keys/server.key
+dh /etc/openvpn/easy-rsa/keys/dh2048.pem
+server 10.168.1.0 255.255.255.0
+push "redirect-gateway def1"
+push "dhcp-option DNS 8.8.8.8"
+push "dhcp-option DNS 8.8.4.4"
+client-to-client
+keepalive 10 120
+comp-lzo
+persist-key
+persist-tun
+verb 3
+status openvpn-status.log
+{% endcodeblock %}
 
 ### Setup ip forward
 1. iptables -t nat -A POSTROUTING -s 10.168.0.0/16 -o eth0 -j MASQUERADE
@@ -97,15 +96,16 @@ categories:
 	iptables-restore < /etc/iptables.rules
 	```
 1. chmod +x /etc/network/if-up.d/iptables
-1. vi /etc/sysctl.conf
+1. vi /etc/sysctl.conf, change the following fields.
 
-	```
+{% codeblock Configure iptable %}
 	net.ipv4.ip_forward = 1
 	net.ipv4.conf.all.send_redirects = 0
 	net.ipv4.conf.default.send_redirects = 0
 	net.ipv4.conf.all.accept_redirects = 0
 	net.ipv4.conf.default.accept_redirects = 0
-	```
+{% endcodeblock %}
+
 1. sudo sysctl -p
 1. /etc/init.d/openvpn restart
 1. /etc/init.d/networking restart
@@ -119,25 +119,26 @@ categories:
 	- ta.key
 3. Create a folder on you Desktop, with name like ```myvpn```
 4. Put all above 4 files into the foler
-5. Create a text file named: ```config.ovpn```, PS: change ```107.20.217.201``` to your server's ip address.
+5. Create a text file named: ```config.ovpn```, PS: change ```111.111.111.111``` to your server's ip address.
 
-	```
-	client
-	dev tun
-	proto tcp
-	remote 107.20.217.201 443
-	resolv-retry infinite
-	nobind
-	persist-key
-	persist-tun
-	ca ca.crt
-	cert davion.crt
-	key davion.key
-	ns-cert-type server
-	# redirect-gateway
-	comp-lzo
-	verb 3
-	```
+{% codeblock Configure client %}
+client
+dev tun
+proto tcp
+remote 111.111.111.111 443
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+ca ca.crt
+cert davion.crt
+key davion.key
+ns-cert-type server
+redirect-gateway
+comp-lzo
+verb 3
+{% endcodeblock %}
+
 6. Change folder ```myvpn``` to ```myvpn.tblk```
 7. Double click ```myvpn.tblk``` to install this vpn
 8. After install it, on the top right corner you can see a house-like icon, click it and selct ```connect```
