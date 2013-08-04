@@ -9,12 +9,9 @@
   <meta name="author" content="Reno">
 
   
-  <meta name="description" content="sudo apt-get install vsftpd
-change config: /etc/vsftpd.conf
-anonymous_enable=NO
-local_enable=YES
-write_enable=YES
-sudo service vsftpd restart Client &hellip;">
+  <meta name="description" content="Server Install Packages sudo apt-get install openvpn udev lzop libssl-dev openssl copy existing scripts cd /etc/openvpn/
+sudo mkdir easy-rsa
+cp -r / &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -72,6 +69,229 @@ sudo service vsftpd restart Client &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/31/create-a-vpn-on-ec2/">Create a Vpn on Ec2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-31T18:25:00-07:00" pubdate data-updated="true">Jul 31<span>st</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Server</h2>
+
+<h3>Install Packages</h3>
+
+<ol>
+<li>sudo apt-get install openvpn udev lzop libssl-dev openssl</li>
+</ol>
+
+
+<h3>copy existing scripts</h3>
+
+<ol>
+<li>cd /etc/openvpn/</li>
+<li>sudo mkdir easy-rsa</li>
+<li>cp -r /usr/share/doc/openvpn/examples/easy-rsa/2.0/* /etc/openvpn/easy-rsa/</li>
+<li>sudo chown -R $USER /etc/openvpn/easy-rsa/</li>
+<li>cd /etc/openvpn/easy-rsa/</li>
+</ol>
+
+
+<h3>Change vars file</h3>
+
+<ol>
+<li><p>vi /etc/openvpn/easy-rsa/vars and change to following fields, you need to adjust to your location and email address.</p>
+
+<p> <code>
+ export KEY_COUNTRY="US"
+ export KEY_PROVINCE="CA"
+ export KEY_CITY="SanJose"
+ export KEY_ORG="renoqiu.com"
+ export KEY_EMAIL="me@renoqiu.com"
+ export KEY_EMAIL=me@renoqiu.com
+ export KEY_CN=renoqiu.com
+ export KEY_NAME=Reno
+ export KEY_OU=Personal
+ export KEY_SIZE=2048
+</code></p></li>
+</ol>
+
+
+<h3>Generate Certificate Authority File</h3>
+
+<ol>
+<li>source vars</li>
+<li>./clean-all</li>
+<li>source vars</li>
+<li>./build-ca</li>
+<li>Do as the prompt</li>
+</ol>
+
+
+<h3>Generate Server Certificate and Key</h3>
+
+<ol>
+<li>cd /etc/openvpn/easy-rsa/</li>
+<li>source vars</li>
+<li>./pkitool &mdash;server server</li>
+<li>cd keys</li>
+<li>openvpn &mdash;genkey &mdash;secret ta.key</li>
+<li>sudo cp server.crt server.key ca.crt dh2048.pem ta.key /etc/openvpn/</li>
+<li>./build-key-server server // ignore this line</li>
+</ol>
+
+
+<h3>Generate Client Certificate and key</h3>
+
+<ol>
+<li>cd /etc/openvpn/easy-rsa/</li>
+<li>source vars</li>
+<li><p>Change someuniqueclientcn to a unique name, and change davion to any client name you like.</p>
+
+<p> <code>
+ KEY_CN=someuniqueclientcn ./pkitool davion
+</code></p></li>
+<li>cd ..</li>
+</ol>
+
+
+<h3>Generate Diffie Hellman Parameter</h3>
+
+<ol>
+<li>./build-dh # ignore this for now</li>
+</ol>
+
+
+<h3>Configure OpenVPN Server</h3>
+
+<ol>
+<li><p>vi /etc/openvpn/server.conf</p>
+
+<p> <code>
+ port 443
+ proto tcp
+ dev tun
+ ca /etc/openvpn/easy-rsa/keys/ca.crt
+ cert /etc/openvpn/easy-rsa/keys/server.crt
+ key /etc/openvpn/easy-rsa/keys/server.key
+ dh /etc/openvpn/easy-rsa/keys/dh2048.pem
+ server 10.168.1.0 255.255.255.0
+ # push "redirect-gateway def1"
+ push "redirect-gateway"
+ push "dhcp-option DNS 8.8.8.8"
+ push "dhcp-option DNS 8.8.4.4"
+ client-to-client
+ keepalive 10 120
+ comp-lzo
+ persist-key
+ persist-tun
+ verb 3
+ status openvpn-status.log
+</code></p></li>
+</ol>
+
+
+<h3>Setup ip forward</h3>
+
+<ol>
+<li>iptables -t nat -A POSTROUTING -s 10.168.0.0/16 -o eth0 -j MASQUERADE</li>
+<li>iptables-save > /etc/iptables.rules</li>
+<li><p>vi /etc/network/if-up.d/iptables</p>
+
+<p> <code>
+ #!/bin/sh
+ iptables-restore &lt; /etc/iptables.rules
+</code></p></li>
+<li>chmod +x /etc/network/if-up.d/iptables</li>
+<li><p>vi /etc/sysctl.conf</p>
+
+<p> <code>
+ net.ipv4.ip_forward = 1
+ net.ipv4.conf.all.send_redirects = 0
+ net.ipv4.conf.default.send_redirects = 0
+ net.ipv4.conf.all.accept_redirects = 0
+ net.ipv4.conf.default.accept_redirects = 0
+</code></p></li>
+<li>sudo sysctl -p</li>
+<li>/etc/init.d/openvpn restart</li>
+<li>/etc/init.d/networking restart</li>
+</ol>
+
+
+<h2>Client for Mac</h2>
+
+<ol>
+<li>Install <a href="https://sourceforge.net/projects/tunnelblick/files/All%20files/Tunnelblick_3.3.dmg/download">Tunnelblick</a>:</li>
+<li>Copy the generated keys from server:
+
+<ul>
+<li>ca.crt</li>
+<li>client.crt</li>
+<li>client.key</li>
+<li>ta.key</li>
+</ul>
+</li>
+<li>Create a folder on you Desktop, with name like <code>myvpn</code></li>
+<li>Put all above 4 files into the foler</li>
+<li><p>Create a text file named: <code>config.ovpn</code>, PS: change <code>107.20.217.201</code> to your server&rsquo;s ip address.</p>
+
+<p> <code>
+ client
+ dev tun
+ proto tcp
+ remote 107.20.217.201 443
+ resolv-retry infinite
+ nobind
+ persist-key
+ persist-tun
+ ca ca.crt
+ cert davion.crt
+ key davion.key
+ ns-cert-type server
+ # redirect-gateway
+ comp-lzo
+ verb 3
+</code></p></li>
+<li>Change folder <code>myvpn</code> to <code>myvpn.tblk</code></li>
+<li>Double click <code>myvpn.tblk</code> to install this vpn</li>
+<li>After install it, on the top right corner you can see a house-like icon, click it and selct <code>connect</code></li>
+</ol>
+
+
+<h2>Reference Link</h2>
+
+<ol>
+<li><a href="http://leapchasm.com/blog/2011/12/07/shearing-firesheep-with-the-cloud/">http://leapchasm.com/blog/2011/12/07/shearing-firesheep-with-the-cloud/</a></li>
+<li><a href="http://www.vpser.net/build/linode-install-openvpn.html">http://www.vpser.net/build/linode-install-openvpn.html</a></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -270,6 +490,10 @@ sudo service vsftpd restart Client &hellip;">
       <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/31/create-a-vpn-on-ec2/">Create a Vpn on Ec2</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/07/31/install-vsftpd-on-ubuntu/">Install Vsftpd on Ubuntu</a>
