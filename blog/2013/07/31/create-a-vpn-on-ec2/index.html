@@ -196,8 +196,7 @@ cp -r / &hellip;">
 </ol>
 
 
-<figure class='code'><figcaption><span>Time to be Awesome - awesome.rb </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>Configure server -</span><a href='/etc/openvpn/server.rb'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -215,25 +214,24 @@ cp -r / &hellip;">
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">port</span> <span class="mi">443</span>
-</span><span class='line'><span class="n">proto</span> <span class="n">tcp</span>
-</span><span class='line'><span class="n">dev</span> <span class="n">tun</span>
-</span><span class='line'><span class="n">ca</span> <span class="sr">/etc/o</span><span class="n">penvpn</span><span class="o">/</span><span class="n">easy</span><span class="o">-</span><span class="n">rsa</span><span class="o">/</span><span class="n">keys</span><span class="o">/</span><span class="n">ca</span><span class="o">.</span><span class="n">crt</span>
-</span><span class='line'><span class="n">cert</span> <span class="sr">/etc/o</span><span class="n">penvpn</span><span class="o">/</span><span class="n">easy</span><span class="o">-</span><span class="n">rsa</span><span class="o">/</span><span class="n">keys</span><span class="o">/</span><span class="n">server</span><span class="o">.</span><span class="n">crt</span>
-</span><span class='line'><span class="n">key</span> <span class="sr">/etc/o</span><span class="n">penvpn</span><span class="o">/</span><span class="n">easy</span><span class="o">-</span><span class="n">rsa</span><span class="o">/</span><span class="n">keys</span><span class="o">/</span><span class="n">server</span><span class="o">.</span><span class="n">key</span>
-</span><span class='line'><span class="n">dh</span> <span class="sr">/etc/o</span><span class="n">penvpn</span><span class="o">/</span><span class="n">easy</span><span class="o">-</span><span class="n">rsa</span><span class="o">/</span><span class="n">keys</span><span class="o">/</span><span class="n">dh2048</span><span class="o">.</span><span class="n">pem</span>
-</span><span class='line'><span class="n">server</span> <span class="mi">10</span><span class="o">.</span><span class="mi">168</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span> <span class="mi">255</span><span class="o">.</span><span class="mi">255</span><span class="o">.</span><span class="mi">255</span><span class="o">.</span><span class="mi">0</span>
-</span><span class='line'><span class="n">push</span> <span class="s2">&quot;redirect-gateway def1&quot;</span>
-</span><span class='line'><span class="n">push</span> <span class="s2">&quot;dhcp-option DNS 8.8.8.8&quot;</span>
-</span><span class='line'><span class="n">push</span> <span class="s2">&quot;dhcp-option DNS 8.8.4.4&quot;</span>
-</span><span class='line'><span class="n">client</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">client</span>
-</span><span class='line'><span class="n">keepalive</span> <span class="mi">10</span> <span class="mi">120</span>
-</span><span class='line'><span class="n">comp</span><span class="o">-</span><span class="n">lzo</span>
-</span><span class='line'><span class="n">persist</span><span class="o">-</span><span class="n">key</span>
-</span><span class='line'><span class="n">persist</span><span class="o">-</span><span class="n">tun</span>
-</span><span class='line'><span class="n">verb</span> <span class="mi">3</span>
-</span><span class='line'><span class="n">status</span> <span class="n">openvpn</span><span class="o">-</span><span class="n">status</span><span class="o">.</span><span class="n">log</span>
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>port 443
+</span><span class='line'>proto tcp
+</span><span class='line'>dev tun
+</span><span class='line'>ca /etc/openvpn/easy-rsa/keys/ca.crt
+</span><span class='line'>cert /etc/openvpn/easy-rsa/keys/server.crt
+</span><span class='line'>key /etc/openvpn/easy-rsa/keys/server.key
+</span><span class='line'>dh /etc/openvpn/easy-rsa/keys/dh2048.pem
+</span><span class='line'>server 10.168.1.0 255.255.255.0
+</span><span class='line'>push "redirect-gateway def1"
+</span><span class='line'>push "dhcp-option DNS 8.8.8.8"
+</span><span class='line'>push "dhcp-option DNS 8.8.4.4"
+</span><span class='line'>client-to-client
+</span><span class='line'>keepalive 10 120
+</span><span class='line'>comp-lzo
+</span><span class='line'>persist-key
+</span><span class='line'>persist-tun
+</span><span class='line'>verb 3
+</span><span class='line'>status openvpn-status.log</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>Setup ip forward</h3>
