@@ -4,7 +4,7 @@
   <title><![CDATA[Reno's Blog]]></title>
   <link href="http://renoqiu.github.io/atom.xml" rel="self"/>
   <link href="http://renoqiu.github.io/"/>
-  <updated>2013-08-03T22:51:28-07:00</updated>
+  <updated>2013-08-04T11:58:50-07:00</updated>
   <id>http://renoqiu.github.io/</id>
   <author>
     <name><![CDATA[Reno]]></name>
@@ -41,7 +41,7 @@
 <h3>Change vars file</h3>
 
 <ol>
-<li>vi /etc/openvpn/easy-rsa/vars and change to following fields, you need to adjust to your location and email address.</li>
+<li>edit /etc/openvpn/easy-rsa/vars and change the following fields, you need to use your own location and email address.</li>
 </ol>
 
 
@@ -75,7 +75,6 @@
 <li>./clean-all</li>
 <li>source vars</li>
 <li>./build-ca</li>
-<li>Do as the prompt</li>
 </ol>
 
 
@@ -88,7 +87,7 @@
 <li>cd keys</li>
 <li>openvpn &mdash;genkey &mdash;secret ta.key</li>
 <li>sudo cp server.crt server.key ca.crt dh2048.pem ta.key /etc/openvpn/</li>
-<li>./build-key-server server // ignore this line</li>
+<li>./build-key-server server // ignore this line for now</li>
 </ol>
 
 
@@ -97,7 +96,7 @@
 <ol>
 <li>cd /etc/openvpn/easy-rsa/</li>
 <li>source vars</li>
-<li><p>Change someuniqueclientcn to a unique name, and change davion to any client name you like.</p>
+<li><p>Change <code>someuniqueclientcn</code> to a unique name of your choice, and change <code>davion</code> to any client name you like.</p>
 
 <p> <code>
  KEY_CN=someuniqueclientcn ./pkitool davion
@@ -164,7 +163,7 @@
 <ol>
 <li>iptables -t nat -A POSTROUTING -s 10.168.0.0/16 -o eth0 -j MASQUERADE</li>
 <li>iptables-save > /etc/iptables.rules</li>
-<li>vi /etc/network/if-up.d/iptables</li>
+<li>Edit /etc/network/if-up.d/iptables create it if not exist</li>
 </ol>
 
 
@@ -177,7 +176,7 @@
 
 <ol>
 <li>chmod +x /etc/network/if-up.d/iptables</li>
-<li>vi /etc/sysctl.conf, change the following fields.</li>
+<li>Edit /etc/sysctl.conf and change the following fields.</li>
 </ol>
 
 
@@ -214,8 +213,8 @@
 <li>ta.key</li>
 </ul>
 </li>
-<li>Create a folder on you Desktop, with name like <code>myvpn</code></li>
-<li>Put all above 4 files into the foler</li>
+<li>Create a folder on you Desktop, with name of your choice such as:  <code>myvpn</code></li>
+<li>Put all above 4 files into the folder</li>
 <li>Create a text file named: <code>config.ovpn</code>, PS: change <code>111.111.111.111</code> to your server&rsquo;s ip address.</li>
 </ol>
 
@@ -256,7 +255,7 @@
 <ol>
 <li>Change folder <code>myvpn</code> to <code>myvpn.tblk</code></li>
 <li>Double click <code>myvpn.tblk</code> to install this vpn</li>
-<li>After install it, on the top right corner you can see a house-like icon, click it and selct <code>connect</code></li>
+<li>After install it, on the top right corner you will see a house-like icon, click it and select <code>connect ***</code></li>
 </ol>
 
 
