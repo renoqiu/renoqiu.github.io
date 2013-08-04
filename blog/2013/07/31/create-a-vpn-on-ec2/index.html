@@ -135,11 +135,11 @@ cp -r / &hellip;">
 </pre></td><td class='code'><pre><code class=''><span class='line'>export KEY_COUNTRY="US"
 </span><span class='line'>export KEY_PROVINCE="CA"
 </span><span class='line'>export KEY_CITY="SanJose"
-</span><span class='line'>export KEY_ORG="renoqiu.com"
-</span><span class='line'>export KEY_EMAIL="me@renoqiu.com"
-</span><span class='line'>export KEY_EMAIL=me@renoqiu.com
-</span><span class='line'>export KEY_CN=renoqiu.com
-</span><span class='line'>export KEY_NAME=Reno
+</span><span class='line'>export KEY_ORG="test.com"
+</span><span class='line'>export KEY_EMAIL="me@test.com"
+</span><span class='line'>export KEY_EMAIL=me@test.com
+</span><span class='line'>export KEY_CN=test.com
+</span><span class='line'>export KEY_NAME=test
 </span><span class='line'>export KEY_OU=Personal
 </span><span class='line'>export KEY_SIZE=2048</span></code></pre></td></tr></table></div></figure>
 
@@ -284,13 +284,13 @@ cp -r / &hellip;">
 </li>
 <li>Create a folder on you Desktop, with name like <code>myvpn</code></li>
 <li>Put all above 4 files into the foler</li>
-<li><p>Create a text file named: <code>config.ovpn</code>, PS: change <code>107.20.217.201</code> to your server&rsquo;s ip address.</p>
+<li><p>Create a text file named: <code>config.ovpn</code>, PS: change <code>111.111.111.111</code> to your server&rsquo;s ip address.</p>
 
 <p> <code>
  client
  dev tun
  proto tcp
- remote 107.20.217.201 443
+ remote 111.111.111.111 443
  resolv-retry infinite
  nobind
  persist-key
