@@ -9,9 +9,8 @@
   <meta name="author" content="Reno">
 
   
-  <meta name="description" content="Server Install Packages sudo apt-get install openvpn udev lzop libssl-dev openssl copy existing scripts cd /etc/openvpn/
-sudo mkdir easy-rsa
-cp -r / &hellip;">
+  <meta name="description" content="Usefull SSH Command ssh -C -f -N -g -L listen_port:DST_Host:DST_port user@Tunnel_Host -f Fork into background after authentication
+-L port:remotehost &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +68,119 @@ cp -r / &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/04/setup-ssh-port-forward/">Setup SSH Port Forward</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-04T20:39:00-07:00" pubdate data-updated="true">Aug 4<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>Usefull SSH Command</h1>
+
+<p><code>ssh -C -f -N -g -L listen_port:DST_Host:DST_port user@Tunnel_Host</code></p>
+
+<ul>
+<li>-f Fork into background after authentication</li>
+<li>-L port:remotehost:remoteport Forward local request of <code>localhost:port</code> our remote server <code>remotehost:remoteport</code></li>
+<li>-R port:remotehost:remoteport Forward request from <code>remotehost:remoteport</code> to our local machine <code>localhost:port</code></li>
+<li>-D port Use a dynamic port, when there is a connection to this port, the request will be forwarded to our remote host, and the target host is determined by application protocal, [Support SOCKS4]</li>
+<li>-C Enable compression.</li>
+<li>-N Do not execute a shell or command.</li>
+<li>-g Allow remote hosts to connect to forwarded ports.</li>
+</ul>
+
+
+<h1>Scenarios</h1>
+
+<p>Assume our local machine is A, we have a server B which will forward packets for us. [We have a username/password on Server B]</p>
+
+<p>ip addresses/port:</p>
+
+<ul>
+<li>A: localhost:2121</li>
+<li>B: 111.111.111.111</li>
+<li>C: 222.222.222.222</li>
+</ul>
+
+
+<h2>1. localhost to remote host</h2>
+
+<p>We want to connect to server C&rsquo;s 80 port. Execute the following command:</p>
+
+<p>sudo ssh -f -N -L 2121:222.222.222.222:80 <a href="&#109;&#x61;&#x69;&#108;&#x74;&#x6f;&#58;&#117;&#115;&#x65;&#114;&#110;&#97;&#109;&#101;&#x40;&#x31;&#49;&#49;&#x2e;&#x31;&#49;&#49;&#46;&#49;&#x31;&#49;&#46;&#x31;&#x31;&#49;">&#x75;&#115;&#x65;&#x72;&#x6e;&#97;&#x6d;&#101;&#x40;&#x31;&#49;&#x31;&#x2e;&#49;&#49;&#49;&#x2e;&#49;&#49;&#49;&#x2e;&#49;&#x31;&#x31;</a></p>
+
+<p>Then open your browser, type url: localhost:2121, and you will find yourself connected to the web page of server: 222.222.222.222</p>
+
+<h2>2. remote host to localhost</h2>
+
+<p>We want to connect to our local machine A which does not have a public ip. Because of <code>NAT</code>, we can not connect to this local machine from external network. But with ssh, we can create a tunnel which connects A to B. Then we can login our server B which has an external ip address, and then connect to our machine A. Execute the following command on machine A.</p>
+
+<p>ssh -N -f -R 2222:127.0.0.1:22 <a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#x75;&#x73;&#101;&#114;&#110;&#97;&#109;&#101;&#x40;&#x31;&#49;&#x31;&#46;&#x31;&#x31;&#49;&#46;&#x31;&#x31;&#x31;&#x2e;&#x31;&#49;&#49;">&#117;&#115;&#101;&#x72;&#x6e;&#x61;&#109;&#101;&#64;&#49;&#x31;&#x31;&#x2e;&#x31;&#x31;&#49;&#46;&#49;&#x31;&#49;&#x2e;&#49;&#49;&#x31;</a></p>
+
+<p>This connect machine A&rsquo;s port 22 to server B&rsquo;s 2222 port. Then we can login to our server B, and execute the following command on server B:</p>
+
+<p>ssh -p 2222 localhost</p>
+
+<p>This will connect us to machine A.</p>
+
+<h1>Some tricks</h1>
+
+<p>If we do nothing, after some period, our ssh tunnel will disconnect. In order to solve this issue, we can do the following tricks.</p>
+
+<h2>Some important ssh option</h2>
+
+<ul>
+<li>-o TCPKeepAlive=yes This will keep our tunnel open.</li>
+<li>We can remove <code>-N</code> and add some task which will generate output repeatly such as <code>vmstat 30</code> or <code>top</code>. eg. <code>ssh -R 2222:127.0.0.1:22 username@111.111.111.111 "vmstat 30"</code></li>
+<li>-o ServerAliveInterval=n -o ServerAliveCountMax=m <code>n</code> and <code>m</code> is some number of your choice. These two options are quite important which will make your ssh quit automatically when your ssh get stuck. You may make a monitor script which will restart your ssh after quit.</li>
+</ul>
+
+
+<h1>Grant access to other machines</h1>
+
+<p>Use the above command, we can only access the port in our local machine, what if we give other machine access to this port, we need make it bind to <code>0.0.0.0</code> instead of <code>127.0.0.1</code>, and set SSH server&rsquo;s <code>GatewayPorts yes</code> in <code>/etc/sshd_config</code> file.</p>
+
+<h1>Use SSH tunnel to create SOCKS server</h1>
+
+<p>As we can see, we can bind to port like <code>22</code> and <code>80</code> separately, but if we want to use our server B to access many other resourse, do we need to create all this port separately, the answer is no. We can use <code>-D</code> option. The following example does what we want. [PS: SOCK5 Protocol]</p>
+
+<ul>
+<li>ssh -N -f -D 1080 123.123.123 # Bind to 127.0.0.1</li>
+<li>ssh -N -f -D 0.0.0.0:1080 123.123.123.123 # Bind to 0.0.0.0</li>
+</ul>
+
+
+<h1>Reference Link</h1>
+
+<p><a href="http://blog.creke.net/722.html">http://blog.creke.net/722.html</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -550,6 +662,10 @@ cp -r / &hellip;">
       <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/04/setup-ssh-port-forward/">Setup SSH Port Forward</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/07/31/create-a-vpn-on-ec2/">Install and Configure OpenVPN on EC2</a>
