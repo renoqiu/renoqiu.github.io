@@ -126,7 +126,7 @@
 
 <p>We want to connect to server C&rsquo;s 80 port. Execute the following command:</p>
 
-<p>sudo ssh -f -N -L 2121:222.222.222.222:80 <a href="&#109;&#x61;&#x69;&#108;&#x74;&#x6f;&#58;&#117;&#115;&#x65;&#114;&#110;&#97;&#109;&#101;&#x40;&#x31;&#49;&#49;&#x2e;&#x31;&#49;&#49;&#46;&#49;&#x31;&#49;&#46;&#x31;&#x31;&#49;">&#x75;&#115;&#x65;&#x72;&#x6e;&#97;&#x6d;&#101;&#x40;&#x31;&#49;&#x31;&#x2e;&#49;&#49;&#49;&#x2e;&#49;&#49;&#49;&#x2e;&#49;&#x31;&#x31;</a></p>
+<p>sudo ssh -f -N -L 2121:222.222.222.222:80 <a href="&#x6d;&#97;&#105;&#x6c;&#116;&#111;&#58;&#x75;&#x73;&#x65;&#114;&#110;&#x61;&#x6d;&#101;&#x40;&#x31;&#49;&#49;&#x2e;&#x31;&#x31;&#49;&#x2e;&#x31;&#49;&#x31;&#x2e;&#x31;&#49;&#x31;">&#117;&#115;&#x65;&#x72;&#110;&#97;&#x6d;&#x65;&#x40;&#49;&#x31;&#x31;&#46;&#x31;&#49;&#x31;&#46;&#49;&#x31;&#49;&#46;&#x31;&#49;&#x31;</a></p>
 
 <p>Then open your browser, type url: localhost:2121, and you will find yourself connected to the web page of server: 222.222.222.222</p>
 
@@ -134,7 +134,7 @@
 
 <p>We want to connect to our local machine A which does not have a public ip. Because of <code>NAT</code>, we can not connect to this local machine from external network. But with ssh, we can create a tunnel which connects A to B. Then we can login our server B which has an external ip address, and then connect to our machine A. Execute the following command on machine A.</p>
 
-<p>ssh -N -f -R 2222:127.0.0.1:22 <a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#x75;&#x73;&#101;&#114;&#110;&#97;&#109;&#101;&#x40;&#x31;&#49;&#x31;&#46;&#x31;&#x31;&#49;&#46;&#x31;&#x31;&#x31;&#x2e;&#x31;&#49;&#49;">&#117;&#115;&#101;&#x72;&#x6e;&#x61;&#109;&#101;&#64;&#49;&#x31;&#x31;&#x2e;&#x31;&#x31;&#49;&#46;&#49;&#x31;&#49;&#x2e;&#49;&#49;&#x31;</a></p>
+<p>ssh -N -f -R 2222:127.0.0.1:22 <a href="&#109;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#117;&#115;&#101;&#114;&#110;&#97;&#x6d;&#x65;&#64;&#49;&#49;&#x31;&#46;&#x31;&#x31;&#x31;&#46;&#49;&#49;&#49;&#46;&#x31;&#49;&#x31;">&#x75;&#115;&#x65;&#x72;&#110;&#x61;&#109;&#x65;&#x40;&#49;&#x31;&#x31;&#x2e;&#49;&#49;&#x31;&#46;&#49;&#49;&#49;&#46;&#49;&#x31;&#49;</a></p>
 
 <p>This connect machine A&rsquo;s port 22 to server B&rsquo;s 2222 port. Then we can login to our server B, and execute the following command on server B:</p>
 
